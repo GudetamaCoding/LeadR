@@ -1,7 +1,7 @@
 # LeadR - a simple Pb-210 modelling tool
 
 # a simple Pb-210 CIC model
-leadR_CIC <- function( filename, unsupp=NULL, coredate, export=FALSE ) {
+leadR_CIC <- function( filename, unsupp="NULL", coredate, export=NULL ) {
 
   # read in some data
   if ( !file.exists(filename) ) { stop('File doesn\'t exist, check your working directory.') 
@@ -15,11 +15,9 @@ leadR_CIC <- function( filename, unsupp=NULL, coredate, export=FALSE ) {
       df$Pb.210_unsupp <- df$Pb.210 - unsupp 
     } else if ( unsupp == "estimate" ) {  
       df$Pb.210_unsupp <- df$Pb.210 - min(df$Pb.210)
-    } else if (!exists(df$Pb.210_unsupp)) {
+    } else if ("Pb.210_unsupp" %in% colnames(df) == FALSE ) {
       stop('You need to define a means of estimating unsupported Pb-210 or define it in the data.')
-    } else{
-      stop('There is something wrong with df$Pb.210_unsupp and/or the definition of the unsupp estimation behaviour.')
-    }
+    } else{}
 
   # trim everything below the lowest value
   df <- subset( df[1:which.min(df$Pb.210_unsupp ) , ] )
