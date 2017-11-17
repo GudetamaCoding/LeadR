@@ -186,7 +186,7 @@ leadR_CRS <- function( filename, unsupp="estimate", coredate, area="UWITEC", exp
   df$date_1s <- decay_constant_div1 * df$l_li_1s
 
   # calculate the accumulation rate
-  df$accrate <- lapply( as.numeric(rownames(foob)), function(i) (foob$Depth[i] - foob$Depth[i+1]) / (foob$date[i] - foob$date[i+1]) )
+  #df$accrate <- lapply( as.numeric(rownames(foob)), function(i) (foob$Depth[i] - foob$Depth[i+1]) / (foob$date[i] - foob$date[i+1]) )
 
   # return the data and model results
   datessubset <- names(df) %in% c( "Depth", "Depth_Span", "date", "date_error", "accrate" )
